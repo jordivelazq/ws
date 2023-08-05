@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.calixtaondemand.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.calixtaondemand.com">
+<types>
+<xsd:schema targetNamespace="http://www.calixtaondemand.com"
+>
+ <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+ <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+ <xsd:complexType name="Mensaje">
+  <xsd:all>
+   <xsd:element name="telefono" type="xsd:string"/>
+   <xsd:element name="mensaje" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Mensajes">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Mensaje[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Parametro">
+  <xsd:all>
+   <xsd:element name="nombre" type="xsd:string"/>
+   <xsd:element name="valor" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Parametros">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Parametro[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="RespEnvio">
+  <xsd:all>
+   <xsd:element name="id" type="xsd:int"/>
+   <xsd:element name="fInicio" type="xsd:double"/>
+   <xsd:element name="campos" type="xsd:string"/>
+   <xsd:element name="descripcion" type="xsd:string"/>
+   <xsd:element name="lista" type="xsd:string"/>
+   <xsd:element name="por" type="xsd:double"/>
+   <xsd:element name="tipo" type="xsd:int"/>
+   <xsd:element name="idUsuario" type="xsd:int"/>
+   <xsd:element name="especie" type="xsd:int"/>
+   <xsd:element name="estado" type="xsd:int"/>
+   <xsd:element name="costo" type="xsd:double"/>
+   <xsd:element name="mensaje" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="EdoMensajes">
+  <xsd:all>
+   <xsd:element name="tipo" type="xsd:string"/>
+   <xsd:element name="telefono" type="xsd:string"/>
+   <xsd:element name="costo" type="xsd:double"/>
+   <xsd:element name="fechaHora" type="xsd:string"/>
+   <xsd:element name="estado" type="xsd:string"/>
+   <xsd:element name="lista" type="xsd:string"/>
+   <xsd:element name="idEnvio" type="xsd:int"/>
+   <xsd:element name="idEstado" type="xsd:int"/>
+   <xsd:element name="mensaje" type="xsd:string"/>
+   <xsd:element name="destino" type="xsd:string"/>
+   <xsd:element name="campoAux" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="RespEstadoMensajes">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:EdoMensajes[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Transaccion">
+  <xsd:all>
+   <xsd:element name="idCliente" type="xsd:int"/>
+   <xsd:element name="email" type="xsd:string"/>
+   <xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="tipo" type="xsd:string"/>
+   <xsd:element name="fechaHora" type="xsd:string"/>
+   <xsd:element name="mensajes" type="tns:Mensajes"/>
+   <xsd:element name="idivr" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TransaccionCSV">
+  <xsd:all>
+   <xsd:element name="idCliente" type="xsd:int"/>
+   <xsd:element name="email" type="xsd:string"/>
+   <xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="tipo" type="xsd:string"/>
+   <xsd:element name="fechaHora" type="xsd:string"/>
+   <xsd:element name="csv" type="xsd:string"/>
+   <xsd:element name="mensaje" type="xsd:string"/>
+   <xsd:element name="idivr" type="xsd:int"/>
+   <xsd:element name="nombreEnvio" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="TransaccionEnvios">
+  <xsd:all>
+   <xsd:element name="idCliente" type="xsd:int"/>
+   <xsd:element name="email" type="xsd:string"/>
+   <xsd:element name="password" type="xsd:string"/>
+   <xsd:element name="idEnvio" type="xsd:int"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="Eventos">
+  <xsd:all>
+   <xsd:element name="fecha" type="xsd:string"/>
+   <xsd:element name="tipo" type="xsd:string"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="RespEventos">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Eventos[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+ <xsd:complexType name="Saldos">
+  <xsd:all>
+   <xsd:element name="id" type="xsd:int"/>
+   <xsd:element name="servicio" type="xsd:string"/>
+   <xsd:element name="disponible" type="xsd:double"/>
+  </xsd:all>
+ </xsd:complexType>
+ <xsd:complexType name="RespConsultaSaldo">
+  <xsd:complexContent>
+   <xsd:restriction base="SOAP-ENC:Array">
+    <xsd:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="tns:Saldos[]"/>
+   </xsd:restriction>
+  </xsd:complexContent>
+ </xsd:complexType>
+</xsd:schema>
+</types>
+<message name="EnviaMensajesRequest">
+  <part name="mensajes" type="tns:Transaccion" /></message>
+<message name="EnviaMensajesResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EstadoEnvioEmailRequest">
+  <part name="cte" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="id" type="xsd:int" /></message>
+<message name="EstadoEnvioEmailResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EventosEnvioEmailRequest">
+  <part name="cte" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="id" type="xsd:string" /></message>
+<message name="EventosEnvioEmailResponse">
+  <part name="code" type="xsd:int" />
+  <part name="eventos" type="tns:RespEventos" /></message>
+<message name="EnviaEmailRequest">
+  <part name="cte" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="nombreCamp" type="xsd:string" />
+  <part name="to" type="xsd:string" />
+  <part name="from" type="xsd:string" />
+  <part name="fromName" type="xsd:string" />
+  <part name="replyTo" type="xsd:string" />
+  <part name="subject" type="xsd:string" />
+  <part name="incrustarImagen" type="xsd:int" />
+  <part name="textEmail" type="xsd:string" />
+  <part name="htmlEmail" type="xsd:string" />
+  <part name="seleccionaAdjuntos" type="xsd:int" />
+  <part name="fileBase64" type="xsd:base64Binary" />
+  <part name="fileNameBase64" type="xsd:string" />
+  <part name="nombreArchivoPersonalizado" type="xsd:string" />
+  <part name="envioSinArchivo" type="xsd:int" />
+  <part name="fechaInicio" type="xsd:string" />
+  <part name="horaInicio" type="xsd:int" />
+  <part name="minutoInicio" type="xsd:int" />
+  <part name="listasNegras" type="xsd:string" />
+  <part name="referencia" type="xsd:string" />
+  <part name="campoAuxiliar" type="xsd:string" /></message>
+<message name="EnviaEmailResponse">
+  <part name="return" type="xsd:string" /></message>
+<message name="EnviaMensajesCSVRequest">
+  <part name="mensajes" type="tns:TransaccionCSV" /></message>
+<message name="EnviaMensajesCSVResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EnviaMensajeRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="tipo" type="xsd:string" />
+  <part name="fechaHora" type="xsd:string" />
+  <part name="telefono" type="xsd:string" />
+  <part name="mensaje" type="xsd:string" />
+  <part name="idivr" type="xsd:int" /></message>
+<message name="EnviaMensajeResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EstadoEnvioRequest">
+  <part name="idEnvio" type="tns:TransaccionEnvios" /></message>
+<message name="EstadoEnvioResponse">
+  <part name="return" type="tns:RespEnvio" /></message>
+<message name="EstadoMensajesRequest">
+  <part name="idEnvio" type="tns:TransaccionEnvios" /></message>
+<message name="EstadoMensajesResponse">
+  <part name="return" type="tns:RespEstadoMensajes" /></message>
+<message name="EnviaMensajeOLRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="tipo" type="xsd:string" />
+  <part name="telefono" type="xsd:string" />
+  <part name="mensaje" type="xsd:string" />
+  <part name="idivr" type="xsd:int" />
+  <part name="fechaInicio" type="xsd:string" />
+  <part name="campoAux" type="xsd:string" />
+  <part name="asunto" type="xsd:string" />
+  <part name="url" type="xsd:string" />
+  <part name="idApp" type="xsd:string" />
+  <part name="token" type="xsd:string" />
+  <part name="parametros" type="tns:Parametros" />
+  <part name="idOrigen" type="xsd:string" />
+  <part name="mismoOrigen" type="xsd:int" />
+  <part name="minutosReintento" type="xsd:int" />
+  <part name="cantidadIntentos" type="xsd:int" /></message>
+<message name="EnviaMensajeOLResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EnviaMensajeOLRefRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="tipo" type="xsd:string" />
+  <part name="telefono" type="xsd:string" />
+  <part name="mensaje" type="xsd:string" />
+  <part name="idivr" type="xsd:int" />
+  <part name="fechaInicio" type="xsd:string" />
+  <part name="campoAux" type="xsd:string" />
+  <part name="asunto" type="xsd:string" />
+  <part name="url" type="xsd:string" />
+  <part name="idApp" type="xsd:string" />
+  <part name="token" type="xsd:string" />
+  <part name="parametros" type="tns:Parametros" />
+  <part name="idOrigen" type="xsd:string" />
+  <part name="mismoOrigen" type="xsd:int" />
+  <part name="minutosReintento" type="xsd:int" />
+  <part name="cantidadIntentos" type="xsd:int" /></message>
+<message name="EnviaMensajeOLRefResponse">
+  <part name="resultado" type="xsd:int" />
+  <part name="referencia" type="xsd:string" /></message>
+<message name="EstadoMensajeOLRefRequest">
+  <part name="referencia" type="xsd:string" /></message>
+<message name="EstadoMensajeOLRefResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EstadoMensajeOLAuxRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="campoAux" type="xsd:string" /></message>
+<message name="EstadoMensajeOLAuxResponse">
+  <part name="resultado" type="xsd:int" />
+  <part name="referencia" type="xsd:string" />
+  <part name="id" type="xsd:string" /></message>
+<message name="AgregaAListaRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="idLista" type="xsd:int" />
+  <part name="telefono" type="xsd:string" />
+  <part name="nombre" type="xsd:string" /></message>
+<message name="AgregaAListaResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="ExisteEnListaRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="idLista" type="xsd:int" />
+  <part name="telefono" type="xsd:string" /></message>
+<message name="ExisteEnListaResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="EliminaDeListaRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="idLista" type="xsd:int" />
+  <part name="telefono" type="xsd:string" /></message>
+<message name="EliminaDeListaResponse">
+  <part name="return" type="xsd:int" /></message>
+<message name="GeneraLigaCortaRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="url" type="xsd:string" /></message>
+<message name="GeneraLigaCortaResponse">
+  <part name="resultado" type="xsd:int" />
+  <part name="ligaCorta" type="xsd:string" /></message>
+<message name="CreaEnvioEmailS3Request">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" /></message>
+<message name="CreaEnvioEmailS3Response">
+  <part name="resultado" type="xsd:int" />
+  <part name="idEnvio" type="xsd:int" />
+  <part name="sessionToken" type="xsd:string" /></message>
+<message name="AgregaArchivoAEmailS3Request">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="idEnvio" type="xsd:int" />
+  <part name="tipo" type="xsd:string" />
+  <part name="base64FileContent" type="xsd:string" />
+  <part name="fileName" type="xsd:string" /></message>
+<message name="AgregaArchivoAEmailS3Response">
+  <part name="resultado" type="xsd:int" /></message>
+<message name="ConfirmaEnvioEmailS3Request">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="idEnvio" type="xsd:int" />
+  <part name="nombreEnvio" type="xsd:string" />
+  <part name="csvBase64" type="xsd:string" />
+  <part name="from" type="xsd:string" />
+  <part name="fromName" type="xsd:string" />
+  <part name="replyTo" type="xsd:string" />
+  <part name="asunto" type="xsd:string" />
+  <part name="incrustaImagenes" type="xsd:string" />
+  <part name="cuerpoTextoBase64" type="xsd:string" />
+  <part name="cuerpoHTMLBase64" type="xsd:string" />
+  <part name="nombreAdjuntosIndividuales" type="xsd:string" />
+  <part name="enviarSiFaltanAdjuntos" type="xsd:int" />
+  <part name="fechaInicio" type="xsd:string" />
+  <part name="fechaFin" type="xsd:string" /></message>
+<message name="ConfirmaEnvioEmailS3Response">
+  <part name="resultado" type="xsd:int" /></message>
+<message name="ConsultaCarrierRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" />
+  <part name="telefono" type="xsd:string" /></message>
+<message name="ConsultaCarrierResponse">
+  <part name="carrier" type="xsd:int" />
+  <part name="resultado" type="xsd:int" /></message>
+<message name="ConsultaSaldoRequest">
+  <part name="idCliente" type="xsd:int" />
+  <part name="email" type="xsd:string" />
+  <part name="password" type="xsd:string" /></message>
+<message name="ConsultaSaldoResponse">
+  <part name="return" type="tns:RespConsultaSaldo" /></message>
+<portType name="GatewayPortType">
+  <operation name="EnviaMensajes">
+    <documentation>Envia mensajes a traves del Gateway</documentation>
+    <input message="tns:EnviaMensajesRequest"/>
+    <output message="tns:EnviaMensajesResponse"/>
+  </operation>
+  <operation name="EstadoEnvioEmail">
+    <documentation>Obtiene el estado de un mensaje de envio permanente</documentation>
+    <input message="tns:EstadoEnvioEmailRequest"/>
+    <output message="tns:EstadoEnvioEmailResponse"/>
+  </operation>
+  <operation name="EventosEnvioEmail">
+    <documentation>Obtiene los eventos de un mensaje de envio permanente</documentation>
+    <input message="tns:EventosEnvioEmailRequest"/>
+    <output message="tns:EventosEnvioEmailResponse"/>
+  </operation>
+  <operation name="EnviaEmail">
+    <documentation>Envia emails a traves del Gateway</documentation>
+    <input message="tns:EnviaEmailRequest"/>
+    <output message="tns:EnviaEmailResponse"/>
+  </operation>
+  <operation name="EnviaMensajesCSV">
+    <documentation>Envia mensajes a traves del Gateway con un campo CSV</documentation>
+    <input message="tns:EnviaMensajesCSVRequest"/>
+    <output message="tns:EnviaMensajesCSVResponse"/>
+  </operation>
+  <operation name="EnviaMensaje">
+    <documentation>Envia un mensaje a traves del Gateway</documentation>
+    <input message="tns:EnviaMensajeRequest"/>
+    <output message="tns:EnviaMensajeResponse"/>
+  </operation>
+  <operation name="EstadoEnvio">
+    <documentation>Obtiene el estado del envio</documentation>
+    <input message="tns:EstadoEnvioRequest"/>
+    <output message="tns:EstadoEnvioResponse"/>
+  </operation>
+  <operation name="EstadoMensajes">
+    <documentation>Obtiene el estado del Mensaje</documentation>
+    <input message="tns:EstadoMensajesRequest"/>
+    <output message="tns:EstadoMensajesResponse"/>
+  </operation>
+  <operation name="EnviaMensajeOL">
+    <documentation>Envia un solo mensaje sincronamente.</documentation>
+    <input message="tns:EnviaMensajeOLRequest"/>
+    <output message="tns:EnviaMensajeOLResponse"/>
+  </operation>
+  <operation name="EnviaMensajeOLRef">
+    <documentation>Envia un solo mensaje sincronamente y devuelve una referencia.</documentation>
+    <input message="tns:EnviaMensajeOLRefRequest"/>
+    <output message="tns:EnviaMensajeOLRefResponse"/>
+  </operation>
+  <operation name="EstadoMensajeOLRef">
+    <documentation>Obtiene el estado del mensaje basado en la referencia devuelta.</documentation>
+    <input message="tns:EstadoMensajeOLRefRequest"/>
+    <output message="tns:EstadoMensajeOLRefResponse"/>
+  </operation>
+  <operation name="EstadoMensajeOLAux">
+    <documentation>Obtiene el estado del último mensaje basado en el campo auxiliar enviado.</documentation>
+    <input message="tns:EstadoMensajeOLAuxRequest"/>
+    <output message="tns:EstadoMensajeOLAuxResponse"/>
+  </operation>
+  <operation name="AgregaALista">
+    <documentation>Agrega un telefono a una lista. / Add a phone number to a list.</documentation>
+    <input message="tns:AgregaAListaRequest"/>
+    <output message="tns:AgregaAListaResponse"/>
+  </operation>
+  <operation name="ExisteEnLista">
+    <documentation>Verifica la existencia de un teléfono en una lista. / Verify if a phone number exists in a list.</documentation>
+    <input message="tns:ExisteEnListaRequest"/>
+    <output message="tns:ExisteEnListaResponse"/>
+  </operation>
+  <operation name="EliminaDeLista">
+    <documentation>Elimina un telefono de una lista. / Removes a phone number from a list.</documentation>
+    <input message="tns:EliminaDeListaRequest"/>
+    <output message="tns:EliminaDeListaResponse"/>
+  </operation>
+  <operation name="GeneraLigaCorta">
+    <documentation>Genera una liga corta para la URL enviada.</documentation>
+    <input message="tns:GeneraLigaCortaRequest"/>
+    <output message="tns:GeneraLigaCortaResponse"/>
+  </operation>
+  <operation name="CreaEnvioEmailS3">
+    <documentation>Crea un id de envío para carga de archivos para una campaña de email masiva.</documentation>
+    <input message="tns:CreaEnvioEmailS3Request"/>
+    <output message="tns:CreaEnvioEmailS3Response"/>
+  </operation>
+  <operation name="AgregaArchivoAEmailS3">
+    <documentation>Crea un id de envío para carga de archivos para una campaña de email masiva.</documentation>
+    <input message="tns:AgregaArchivoAEmailS3Request"/>
+    <output message="tns:AgregaArchivoAEmailS3Response"/>
+  </operation>
+  <operation name="ConfirmaEnvioEmailS3">
+    <documentation>Crea un id de envío para carga de archivos para una campaña de email masiva.</documentation>
+    <input message="tns:ConfirmaEnvioEmailS3Request"/>
+    <output message="tns:ConfirmaEnvioEmailS3Response"/>
+  </operation>
+  <operation name="ConsultaCarrier">
+    <documentation>Consulta el carrier (operador telefónico) de un número telefónico.</documentation>
+    <input message="tns:ConsultaCarrierRequest"/>
+    <output message="tns:ConsultaCarrierResponse"/>
+  </operation>
+  <operation name="ConsultaSaldo">
+    <documentation>Consulta el saldo del cliente.</documentation>
+    <input message="tns:ConsultaSaldoRequest"/>
+    <output message="tns:ConsultaSaldoResponse"/>
+  </operation>
+</portType>
+<binding name="GatewayBinding" type="tns:GatewayPortType">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="EnviaMensajes">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaMensajes" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EstadoEnvioEmail">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EstadoEnvioEmail" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EventosEnvioEmail">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EventosEnvioEmail" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EnviaEmail">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaEmail" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EnviaMensajesCSV">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaMensajesCSV" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EnviaMensaje">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaMensaje" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EstadoEnvio">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EstadoEnvio" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EstadoMensajes">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EstadoMensajes" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EnviaMensajeOL">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaMensajeOL" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EnviaMensajeOLRef">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EnviaMensajeOLRef" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EstadoMensajeOLRef">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EstadoMensajeOLRef" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EstadoMensajeOLAux">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EstadoMensajeOLRefAux" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="AgregaALista">
+    <soap:operation soapAction="http://www.calixtaondemand.com#AgregaALista" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="ExisteEnLista">
+    <soap:operation soapAction="http://www.calixtaondemand.com#ExisteEnLista" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="EliminaDeLista">
+    <soap:operation soapAction="http://www.calixtaondemand.com#EliminaDeLista" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="GeneraLigaCorta">
+    <soap:operation soapAction="http://www.calixtaondemand.com#GeneraLigaCorta" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="CreaEnvioEmailS3">
+    <soap:operation soapAction="http://www.calixtaondemand.com#CreaEnvioEmailS3" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="AgregaArchivoAEmailS3">
+    <soap:operation soapAction="http://www.calixtaondemand.com#AgregaArchivoAEmailS3" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="ConfirmaEnvioEmailS3">
+    <soap:operation soapAction="http://www.calixtaondemand.com#ConfirmaEnvioEmailS3" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="ConsultaCarrier">
+    <soap:operation soapAction="http://www.calixtaondemand.com#ConsultaCarrier" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+  <operation name="ConsultaSaldo">
+    <soap:operation soapAction="http://www.calixtaondemand.com#ConsultaSaldo" style="rpc"/>
+    <input><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+    <output><soap:body use="encoded" namespace="http://www.calixtaondemand.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+  </operation>
+</binding>
+<service name="Gateway">
+  <port name="GatewayPort" binding="tns:GatewayBinding">
+    <soap:address location="http://www.calixtaondemand.com/ws/webServiceV10.php"/>
+  </port>
+</service>
+</definitions>
